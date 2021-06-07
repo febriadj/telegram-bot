@@ -1,11 +1,12 @@
 {
   "name": "telegram-bot",
   "version": "1.0.0",
-  "description": "febriBot for telegram bot",
+  "description": "ninja digital bot",
   "main": "build/index.js",
   "scripts": {
     "start": "node build/index.js",
-    "dev": "concurrently \"tsc --watch\" \"nodemon build/index.js\""
+    "dev": "concurrently \"tsc --watch\" \"nodemon build/index.js\"",
+    "heroku-postbuild": "npm install"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,7 @@
     "@types/node": "^15.12.1",
     "concurrently": "^6.2.0",
     "dotenv": "^10.0.0",
+    "heroku": "^7.54.0",
     "telegraf": "^4.3.0",
     "typescript": "^4.3.2"
   }
