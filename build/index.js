@@ -1,14 +1,17 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const dotenv = require("dotenv");
-dotenv.config({ path: "./.env" });
-const express = require("express");
-const bot_1 = require("./bot");
-const app = express();
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config({ path: "./.env" });
+const bot_1 = __importDefault(require("./bot"));
+const express_1 = __importDefault(require("express"));
+bot_1.default.telegram.setWebhook(`https://ninjadigitalbot.herokuapp.com/secret`);
+const app = express_1.default();
 const port = process.env.PORT || 3000;
-bot_1.default.telegram.setWebhook(`https://ninjadigitalbot.herokuapp.com/bot${process.env.BOT_TOKEN}`);
-app.use(bot_1.default.webhookCallback(`/bot${process.env.BOT_TOKEN}`));
 app.get('/', (req, res) => res.send('hello world'));
+app.use(bot_1.default.webhookCallback(`/secret`));
+app.listen(port);
+console.log("server listening on port " + port);
 bot_1.default.launch();
-app.listen(3000);
-console.log(`[${port}] server listening`);

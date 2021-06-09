@@ -1,18 +1,18 @@
-import * as dotenv from "dotenv";
+import dotenv from "dotenv";
 dotenv.config({ path: "./.env" });
 
-import * as express from "express";
 import bot from "./bot";
+import express, { Request, Response } from "express";
+
+bot.telegram.setWebhook(`https://ninjadigitalbot.herokuapp.com/secret`);
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-bot.telegram.setWebhook(`https://ninjadigitalbot.herokuapp.com/bot${process.env.BOT_TOKEN}`);
+app.get('/', (req: Request, res: Response) => res.send('hello world'));
+app.use(bot.webhookCallback(`/secret`));
 
-app.use(bot.webhookCallback(`/bot${process.env.BOT_TOKEN}`));
-app.get('/', (req, res) => res.send('hello world'));
+app.listen(port);
+console.log("server listening on port " + port);
 
-bot.launch(); 
-
-app.listen(3000);
-console.log(`[${port}] server listening`);
+bot.launch();
