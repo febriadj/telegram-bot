@@ -9,7 +9,6 @@ const speed = [
 const inSpeed = Math.floor(Math.random() * speed.length);
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
-bot.telegram.setWebhook(`https://ninjadigitalbot.herokuapp.com/bot${process.env.BOT_TOKEN}`);
 bot.start(ctx => ctx.reply("Hi " + ctx.from.first_name + ", selamat datang"));
 
 (function(): void {

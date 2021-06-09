@@ -17,7 +17,6 @@ const speed = [
 ];
 const inSpeed = Math.floor(Math.random() * speed.length);
 const bot = new telegraf_1.Telegraf(process.env.BOT_TOKEN);
-bot.telegram.setWebhook(`https://ninjadigitalbot.herokuapp.com/bot${process.env.BOT_TOKEN}`);
 bot.start(ctx => ctx.reply("Hi " + ctx.from.first_name + ", selamat datang"));
 (function () {
     const forbWord = process.env.FORBIDDEN_WORD.split(", "), strForbWord = forbWord.join("|");
