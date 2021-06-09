@@ -2,6 +2,13 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const dotenv = require("dotenv");
 dotenv.config({ path: "./.env" });
+const express = require("express");
 const bot_1 = require("./bot");
+bot_1.default.telegram.setWebhook(`https://ninjadigitalbot.herokuapp.com/bot${process.env.BOT_TOKEN}`);
+const app = express();
+const port = process.env.PORT || 3000;
+app.use(bot_1.default.webhookCallback(`/bot${process.env.BOT_TOKEN}`));
 bot_1.default.launch();
 console.log("bot telah aktif");
+app.listen(3000);
+console.log(`[${port}] server listening`);
