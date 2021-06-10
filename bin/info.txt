@@ -1,0 +1,7 @@
+Halo.. Perkenalkan, saya Ninja. Sebuah bot yang dikembangkan oleh @%s
+
+Saya dibuat menggunakan bahasa pemograman javascript/typescript
+
+Kunjungi link dibawah ini untuk melihat source code dari @NinjadigitalBot
+
+https://github.com/febriadj/telegram-bot
