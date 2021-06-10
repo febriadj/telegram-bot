@@ -10,6 +10,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const telegraf_1 = require("telegraf");
+const fs_1 = require("fs");
+// inisialisai kecepatan tanggapan bot
 const speed = [
     1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000,
     6500, 7000, 7500, 8000, 8500
@@ -25,7 +27,7 @@ bot.start(ctx => ctx.reply("Hi " + ctx.from.first_name + ", selamat datang"));
         const res = [
             "Hindari penggunaan kata-kata kasar",
             "Kasar amat lu",
-            "Dilarang berkata kasar"
+            "Jangan ngomong kasar"
         ];
         const index = yield Math.floor(Math.random() * res.length);
         setTimeout(() => ctx.reply(res[index]), speed[inSpeed]);
@@ -43,7 +45,7 @@ bot.start(ctx => ctx.reply("Hi " + ctx.from.first_name + ", selamat datang"));
     }));
 })();
 (function () {
-    const reg = /(?=.*?)(?=.*ninja)(?=.*sedang apa|.*lagi [apa|ngapain]).*/im;
+    const reg = /(?=.*?)(?=.*ninja)(?=.*sedang apa|.*[lagi|lg] [apa|ngapain]).*/im;
     bot.hears(new RegExp(reg), (ctx) => __awaiter(this, void 0, void 0, function* () {
         const res = [
             "Lagi rebahan aja nih dikamar",
@@ -52,14 +54,25 @@ bot.start(ctx => ctx.reply("Hi " + ctx.from.first_name + ", selamat datang"));
         ], index = yield Math.floor(Math.random() * res.length);
         setTimeout(() => ctx.reply(res[index]), speed[inSpeed]);
         setTimeout(() => {
-            index === 1 ? ctx.reply("Mau cewek gk lu? @" + ctx.from.username) : null;
+            var _a;
+            if (index === 1) {
+                ctx.reply((_a = "Mau cwk gk lu? @" + ctx.from.username) !== null && _a !== void 0 ? _a : ctx.from.first_name);
+            }
         }, speed[inSpeed] + speed[inSpeed]);
     }));
 })();
-// trigger
-bot.on("new_chat_members", ctx => {
+bot.command("/about", ctx => {
     setTimeout(() => {
-        ctx.reply(`Hi ${ctx.from.first_name}, selamat datang di grup. Saya ninja, salam kenal ya...`);
+        fs_1.readFile("./bin/info.txt", "utf8", (err, data) => {
+            ctx.reply(data.replace("%s", ctx.from.username));
+        });
+    }, speed[inSpeed]);
+});
+// trigger group
+bot.on("new_chat_members", ctx => {
+    const name = ctx.message.new_chat_members[0].first_name;
+    setTimeout(() => {
+        ctx.reply(`Hi ${name}, selamat datang di grup. Saya ninja, salam kenal ya...`);
     }, speed[inSpeed]);
 });
 bot.on("left_chat_member", ctx => {
@@ -67,8 +80,5 @@ bot.on("left_chat_member", ctx => {
     ifTrue === 2
         ? setTimeout(() => ctx.reply("Siapa tuh yang keluar"), speed[inSpeed])
         : null;
-});
-bot.on("sticker", ctx => {
-    setTimeout(() => ctx.reply("👍"), speed[inSpeed]);
 });
 exports.default = bot;
