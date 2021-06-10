@@ -4,9 +4,8 @@
   "description": "ninja digital bot",
   "main": "build/index.js",
   "scripts": {
-    "start": "pm2 start build/index.js",
+    "start": "node build/index.js",
     "dev": "concurrently \"tsc --watch\" \"nodemon build/index.js\"",
-    "stop": "pm2 stop build/index.js",
     "heroku-postbuild": "npm install"
   },
   "repository": {
