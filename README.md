@@ -23,7 +23,11 @@ $ mv .env.example .env
 Rename the `.env.example` file to `.env` and complete the required "environment variables".
 
 ```bash
-$ npm install && npm run build
+$ npm install
+```
+
+```bash
+$ npm run prepare && npm run build
 ```
 
 ```bash
